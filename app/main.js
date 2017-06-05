@@ -15,6 +15,7 @@ const SoundCloud = require('./soundcloud')
 const touchBarMenu = require('./touch-bar-menu')
 const windowOpenPolicy = require('./window-open-policy')
 const windowState = require('electron-window-state')
+const fs = require('fs')
 
 let mainWindow = null
 let aboutWindow = null
@@ -194,6 +195,9 @@ app.on('ready', () => {
 
   soundcloud.on('play', ({ title, subtitle, artworkURL }) => {
     mainWindow.webContents.send('notification', { title, body: subtitle, icon: artworkURL })
+		fs.writeFile(`${app.getPath('documents')}\\soundcleod.txt`, `${subtitle} - ${title}`, (err) => {
+			if (err) throw err
+		})
   })
 
   mainWindow.webContents.once('did-start-loading', () => {
