@@ -195,7 +195,7 @@ app.on('ready', () => {
 
   soundcloud.on('play', ({ title, subtitle, artworkURL }) => {
     mainWindow.webContents.send('notification', { title, body: subtitle, icon: artworkURL })
-		fs.writeFile(`${app.getPath('documents')}\\soundcleod.txt`, `${subtitle} - ${title}`, (err) => {
+		fs.writeFile(`${app.getPath('documents')}\\soundcleod.txt`, `${subtitle} - ${title}   `, (err) => {
 			if (err) throw err
 		})
   })
